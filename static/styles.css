@@ -1,0 +1,158 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('DEFAULT.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Keeps the background static while scrolling */
+}
+
+/* Predefined classes for each background */
+.body-alchemist {
+    background-image: url('/static/ALCHEMIST.jpg');
+}
+
+.body-architect {
+    background-image: url('/static/ARCHITECT.jpg');
+}
+
+.body-valt {
+    background-image: url('/static/VALT.jpg');
+}
+
+.signup-container {
+    width: 750px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.title-image {
+    width: 200px;
+    /* Adjust width as needed */
+    height: auto;
+    /* Maintain aspect ratio */
+    display: block;
+    /* Centers the image in the container if needed */
+    margin: 0 auto;
+    /* Center the image horizontally */
+}
+
+.form-group {
+    display: flex;
+    /* This will enable flexbox */
+    justify-content: space-around;
+    /* This will space out the children elements */
+    align-items: center;
+    /* This will vertically align the children elements */
+    background: rgba(255, 255, 255, 0.5);
+    /* Semi-transparent white */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: calc(33.33% - 10px);
+    padding: 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.confirm-button {
+    background-color: #fff;
+    /* Black background */
+    color: #000;
+    /* White text */
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* Container for the fixed buttons */
+.button-container {
+    position: fixed;
+    /* Fixed position relative to the viewport */
+    bottom: 20px;
+    /* 20px from the bottom */
+    right: 20px;
+    /* 20px from the right */
+    z-index: 1000;
+    /* Ensure it's above other items */
+}
+
+/* Style for the add and remove buttons */
+.add-btn,
+.remove-btn {
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-select {
+    position: absolute;
+    /* Position it at the top-left corner of the page */
+    left: 20px;
+    top: 20px;
+}
+
+select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Styles for tablets */
+@media (max-width: 768px) {
+    .signup-container {
+        width: 90%;
+        /* More width on smaller screens */
+    }
+
+    .form-group {
+        flex-direction: column;
+        /* Stack inputs vertically */
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        /* Full width inputs */
+    }
+
+    .title-image {
+        width: 150px;
+        /* Smaller image on smaller screens */
+    }
+}
+
+/* Styles for mobile phones */
+@media (max-width: 480px) {
+    .title-image {
+        width: 120px;
+        /* Even smaller image for phones */
+    }
+
+    .button-container {
+        position: static;
+        /* Normal flow in the document */
+        margin-top: 20px;
+        /* Add some margin above */
+        text-align: center;
+        /* Center the buttons */
+    }
+}
+
+/* Add more styles as needed */

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="signup-container">
+        <img src="{{ url_for('static', filename='Sherlocked_Logo_wit.png') }}" alt="Sherlocked" class="title-image">
+        <h1 class="title">AGENT SIGNUP</h1>
+        <form action="/" method="post">
+            <div class="room-select">
+                <select name="room" id="room-select" required>
+                    <option value="">Select a Room</option>
+                    <option value="ALCHEMIST" {{ 'selected' if selected_room=='ALCHEMIST' else '' }}>ALCHEMIST</option>
+                    <option value="ARCHITECT" {{ 'selected' if selected_room=='ARCHITECT' else '' }}>ARCHITECT</option>
+                    <option value="VALT" {{ 'selected' if selected_room=='VALT' else '' }}>VALT</option>
+                </select>
+
+            </div>
+            <div id="input-container">
+                <div class="form-group">
+                    <input type="text" name="name[]" placeholder="Name" required>
+                    <input type="text" name="agent_id[]" placeholder="Agent Nr." required>
+                    <input type="email" name="email[]" placeholder="Email" required>
+                </div>
+            </div>
+            <button type="submit" class="confirm-button">CONFIRM</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button type="button" class="add-btn">+</button>
+        <button type="button" class="remove-btn">-</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectElement = document.getElementById('room-select');
+            
+            // Function to update the background based on the selected room
+            function updateBackground() {
+                var selectedRoom = selectElement.value.toLowerCase(); // Get the selected value and convert it to lowercase
+                if (selectedRoom) {
+                    document.body.className = ''; // Clear previous background classes
+                    document.body.classList.add(`body-${selectedRoom}`); // Add the new class based on selection
+                }
+            }
+        
+            // Set the background when the dropdown changes
+            selectElement.addEventListener('change', updateBackground);
+        
+            // Set the background on page load
+            updateBackground();
+        
+            var addButton = document.querySelector('.add-btn');
+            var removeButton = document.querySelector('.remove-btn');
+            var container = document.getElementById('input-container');
+        
+            addButton.addEventListener('click', function () {
+                var formGroup = container.lastElementChild.cloneNode(true);
+                formGroup.querySelectorAll('input').forEach(function (input) {
+                    input.value = ''; // Clear the values in the clone.
+                });
+                container.appendChild(formGroup);
+            });
+        
+            removeButton.addEventListener('click', function () {
+                if (container.children.length > 1) { // Ensure one form group remains.
+                    container.removeChild(container.lastElementChild);
+                }
+            });
+        });
+        </script>
+        
+</body>
+
+</html>
