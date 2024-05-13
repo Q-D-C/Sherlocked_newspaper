@@ -24,7 +24,7 @@ def home():
         emails = request.form.getlist('email[]')
         room = request.form.get('room')
         # Generate a new team ID for each submission
-        team_id = str(uuid.uuid4())  # Generate a unique team ID
+        team_id = '-'.join(str(uuid.uuid4()).split('-')[:3])  # Generate a formatted UUID
         if room:  # Ensure room is not None or empty
             for name, agent_id, email in zip(names, agent_ids, emails):
                 manage_contact(name, email, agent_id, room, team_id)
