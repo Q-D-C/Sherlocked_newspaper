@@ -1,40 +1,61 @@
-how to install:
+# Sherlocked Newspaper Setup
 
-# Configure WiFi networks on static ip, for example by doing:
-# If doing it at the location
+## How to Install:
+
+### Configure WiFi Networks on Static IP
+
+#### If Setting Up at the Location:
+
+```bash
 sudo nmcli dev wifi connect "SSID" password "password"
 sudo nmcli connection modify SSID ipv4.method manual ipv4.addresses "192.168.1.100/24" ipv4.gateway "192.168.1.1" ipv4.dns "8.8.8.8 8.8.4.4"
+```
 
-# If setting up off-site
+#### If Setting Up Off-Site:
+```bash
 sudo nmcli dev wifi connect "home-SSID" password "home-password"
 sudo nmcli connection add type wifi ifname wlan0 con-name remoteSSID ssid "remote-SSID"
 sudo nmcli connection modify RemoteSSID wifi-sec.key-mgmt wpa-psk
 sudo nmcli connection modify RemoteSSID wifi-sec.psk "remote-password"
 sudo nmcli connection modify RemoteSSID ipv4.method manual ipv4.addresses "192.168.1.100/24" ipv4.gateway "192.168.1.1" ipv4.dns "8.8.8.8 8.8.4.4"
 sudo nmcli connection up remoteSSID
+```
 
-# Clone GitHub repository
+### Update system
+```bash
+sudo apt update
+sudo apt upgrade
+```
+
+### Clone GitHub Repository
+```bash
 sudo apt install git -y
 git clone https://github.com/Q-D-C/Sherlocked_newspaper.git
 cd Sherlocked_newspaper
+```
 
-#Put API key into website.py
+### Put API Key into `website.py`
 
-# Install Sendinblue API
+### Install Sendinblue API
+```bash
 pip install sib-api-v3-sdk --break-system-packages
+```
 
-# Install Flask
-sudo apt update
+### Install Flask
+```bash
 sudo apt install python3-pip -y
 sudo pip3 install Flask --break-system-packages
+```
 
-# Create and enable service
+### Create and Enable Service
+```bash
 sudo nano /etc/systemd/system/website.service
+```
 
-#Copy this into the website.service
-
+#### Copy This into the `website.service`:
+```ini
 [Unit]
-Description=Start Flask website at boot
+Description=Start website at boot
 After=network.target
 
 [Service]
@@ -47,14 +68,21 @@ User=pi
 
 [Install]
 WantedBy=multi-user.target
+```
 
-#enable the service
+### Enable the Service
+```bash
 sudo systemctl daemon-reload
 sudo systemctl enable website.service
 sudo systemctl start website.service
+```
 
-# Schedule reboot at midnight
+### Schedule Reboot at Midnight
+```bash
 sudo crontab -e
-# (Add the cron job)
-0 0 * * * /sbin/reboot
+```
 
+#### Add the Following Line to the Cron Job:
+```bash
+0 0 * * * /sbin/reboot
+```
