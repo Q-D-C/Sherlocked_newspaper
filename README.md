@@ -36,6 +36,11 @@ cd Sherlocked_newspaper
 
 ### Put API Key into `website.py`
 
+### Install pip
+```bash
+sudo apt install python3-pip -y
+```
+
 ### Install Sendinblue API
 ```bash
 pip install sib-api-v3-sdk --break-system-packages
@@ -75,6 +80,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable website.service
 sudo systemctl start website.service
+sudo systemctl status website.service
 ```
 
 ### Schedule Reboot at Midnight
