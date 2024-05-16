@@ -1,8 +1,17 @@
 how to install:
 
 # Configure WiFi networks on static ip, for example by doing:
+# If doing it at the location
 sudo nmcli dev wifi connect "SSID" password "password"
 sudo nmcli connection modify SSID ipv4.method manual ipv4.addresses "192.168.1.100/24" ipv4.gateway "192.168.1.1" ipv4.dns "8.8.8.8 8.8.4.4"
+
+# If setting up off-site
+sudo nmcli dev wifi connect "home-SSID" password "home-password"
+sudo nmcli connection add type wifi ifname wlan0 con-name remoteSSID ssid "remote-SSID"
+sudo nmcli connection modify RemoteSSID wifi-sec.key-mgmt wpa-psk
+sudo nmcli connection modify RemoteSSID wifi-sec.psk "remote-password"
+sudo nmcli connection modify RemoteSSID ipv4.method manual ipv4.addresses "192.168.1.100/24" ipv4.gateway "192.168.1.1" ipv4.dns "8.8.8.8 8.8.4.4"
+sudo nmcli connection up remoteSSID
 
 # Clone GitHub repository
 sudo apt install git -y
